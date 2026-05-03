@@ -43,6 +43,10 @@ Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con 
 ## Preguntas adicionales
 
 1. Establece con tus propias palabras, algunas buenas prácticas y funciones recomendadas para optimizar operaciones de lectura, escritura y manipulación en Spark/PySpark.
+    - Aprovechar la escritura con _cache_ adecuadamente: cuando se va a utilizar varias veces un resultado, es buena práctica escribir a caché el dataframe utilizado para evitar recalcular el mismo resultado en cada accionable. Sin embargo, tener cuidado con escribir datasets muy grandes o no frecuentes ya que se puede saturar la memoria.
+    - Preferir funciones nativas de Spark/PySpark sobre UDFs para aprovechar la arquitectura. 
+    - Siempre filtrar datos innecesarios antes de generar resultados. Tranajar con la información mínima indispensable para evitar operaciones innecesariamente caras o tardadas.
+    - Definir esquemas (evitar inferSchema) en lecturas de datos.
     - 
 2. Indica las pruebas estadísticas que has utilizado como parte del desarrollo de una solución de ciencia de datos.
     - Kolmogorov-Smirnov (KS): para corroborar normalidad
