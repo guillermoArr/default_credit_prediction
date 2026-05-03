@@ -43,7 +43,15 @@ Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con 
 ## Preguntas adicionales
 
 1. Establece con tus propias palabras, algunas buenas prácticas y funciones recomendadas para optimizar operaciones de lectura, escritura y manipulación en Spark/PySpark.
+    - 
 2. Indica las pruebas estadísticas que has utilizado como parte del desarrollo de una solución de ciencia de datos.
+    - Kolmogorov-Smirnov (KS): para corroborar normalidad
+    - Population Stability Index (PSI): para corroborar data drift 
+    - Tests de diferencia de medias: para evaluar diferencias sencillas entre la media de dos poblaciones
+    - ANOVA: evaluar diferencia de medias en más de dos grupos
+    - Test de correlaciones: identificar variables con relaciones lineales
+    - Augmented Dicky-Fuller: identificación de estacionariedad 
+    - Test de autocorrelaciones: generalmente con gráficos ACF 
 3. En el contexto de Machine Learning y Ciencia de datos, explica:
     - a. **No Free Lunch Theorem:** este teorema establece que no hay una ruta fácil y general para resolver los problemas de ML, ya que cada problema tiene comportamientos diferentes. El teorema establece que en promedio todos los algoritmos se desempeñan de la misma forma, ya que habrá algoritmos que funcionen mejor en alguna aplicaciones, pero peor en otra. 
     - b. **Occam’s Razor:** el principio de la Navaja de Ockham surge del filósofo Ockham como crítica a las prácticas de filosofía anteriores en las que las explicaciones se explayaban de formas complejas y extensas. En contraposición, Ockham opta por la explicación más simple. En la Ciencia de Datos, y otras disciplinas, este principio esta fuertemente relacionado con la elección de los modelos más parsimoniosos, si es posible, por encima de un modelo más complejo. Recientemente las redes neuronales mostraron un cambio de paradigma debido al Teorema de Aproximación Universal, que establece que con suficientes parámetros una red neuronal puede aproximar cualquier función. Sin embargo, son modelos complejos que, en ocasiones, pueden no generar una mejoría significativa en comparación a otros modelos más simples y parsimoniosos como una regresión multiple o una regresión logística; en estos casos lo más recomendable es seguir el principio de la Navaja de Ockham y optar por una explicación simple y parsimoniosa en lugar de una red neuronal. Incluso dentro de una misma familia de modelos, digamos una regresión multiple, el principio sostiene que ante un mismo desempeño de dos modelos, aquel con menos parámetros (por lo tanto, menos variables explicativas) es preferible.  
