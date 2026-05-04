@@ -64,6 +64,11 @@ Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con 
 
 ## Insights detectados
 1. De las deficiencias en los datos, ¿cuáles y como las identificaste?
+    - **INCONSISTENCIAS EN VARIABLES:**  
+        - Al realizar el análisis exploratorio, rápidamente podemos identificar un nombre incorrecto en la variable *PAY_0* debido a la inconsitencia en el orden numérico con las demás variables *PAY_i*, así como la inconsistencia en tiempo comparado con las variables de *PAY_AMT* y *BILL_AMT*. 
+        - Al urilizar la función *pd.describe()* también es fácil detectar inconsistencias en los valores de las variables *EDUCATION* (valores 0, 5 y 6) y *MARRIAGE* (valor 0) en las que se observan valores distintos de los especificados en la documentación otorgada, si bien podría investigarse sobre estas codificaciones (valores imputados, agregar en categoria others, etc) conservarlos dificultaría la interpretación de la variable (algo sumamente importante para modelos de probabilidad de default e interacción con clientes). Además, las variables de *PAY* se observaban con una distribución "recorrida" respecto a los valores documentados (con rango -2 a 8 con valores 0, en lugar de -1 a 9). Usando **sidetable** es muy sencillo conseguir los porcentajes y distribución acumulada de los distintos valores de estas funciones categóricas.
+    - **DESBALANCE DE VARIABLE DEFAULT:**
+        - Usando porcentajes y gráficos observando el tamaño de las clases de la variable default detectados un desbalance de 1:3.5.
 2. De realizar creación de variables, explica cuales hiciste y por qué.
 3. De los modelos realizados, ¿cómo seleccionaste al mejor?
 4. ¿Qué desafíos encontraste y cómo los superaste?
@@ -75,7 +80,9 @@ Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con 
     - Preferir funciones nativas de Spark/PySpark sobre UDFs para aprovechar la arquitectura. 
     - Siempre filtrar datos innecesarios antes de generar resultados. Tranajar con la información mínima indispensable para evitar operaciones innecesariamente caras o tardadas.
     - Definir esquemas (evitar inferSchema) en lecturas de datos.
-    - 
+    - Particiones (partitionBy, repartition, coalesce) depende el caso y lo que se busque hacer, pero hay que tomar en cuenta como particionar para aprovechar adecuadamente el computo paralelo
+    - Broadcast join para tablas pequeñas evitando shuffle
+    - explain y Spark UI para evaluación de métricas de performance e identificar cuellos de botella
 2. Indica las pruebas estadísticas que has utilizado como parte del desarrollo de una solución de ciencia de datos.
     - Kolmogorov-Smirnov (KS): para corroborar normalidad
     - Population Stability Index (PSI): para corroborar data drift 
