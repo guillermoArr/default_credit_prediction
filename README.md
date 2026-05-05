@@ -90,7 +90,8 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
     - **F1 Score y accuracy:** 
 4. ¿Qué desafíos encontraste y cómo los superaste?
     - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. 
-    - 
+    - Organización de pasos y código de acuerdo a qué variable objetivo se desea. En el EDA intenté explorar todo lo posible sobre el dataset, enfocándolo hacia las variables objetivo según consideraba apropiado. Mientras que en el paso de preparación de datos preferí separar por secciones de acuerdo a lo buscado ya que los datasets si bien comparten muchos pasos de preparación similares, no pueden ser iguales debido a la temporalidad de la variable objetivo. 
+    
 
 ## Preguntas adicionales
 
