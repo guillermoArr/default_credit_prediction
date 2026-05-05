@@ -4,12 +4,12 @@ SEX,binary
 EDUCATION,categorical
 MARRIAGE,categorical
 AGE,numeric
-PAY_1,numeric
-PAY_2,numeric
-PAY_3,numeric
-PAY_4,numeric
-PAY_5,numeric
-PAY_6,numeric
+PAY_1,categorical
+PAY_2,categorical
+PAY_3,categorical
+PAY_4,categorical
+PAY_5,categorical
+PAY_6,categorical
 BILL_AMT1,numeric
 BILL_AMT2,numeric
 BILL_AMT3,numeric
@@ -33,5 +33,5 @@ EDUCATION_University,binary
 credit_utilization,numeric
 avg_monthly_bill,numeric
 avg_monthly_payment,numeric
-max_payment_delay,numeric
+max_payment_delay,categorical
 has_any_delay,binary
