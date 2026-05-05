@@ -82,6 +82,7 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
     - **DESBALANCE DE VARIABLE DEFAULT:**
         - Usando porcentajes y gráficos observando el tamaño de las clases de la variable default detectados un desbalance de 1:3.5.
 2. De realizar creación de variables, explica cuales hiciste y por qué.
+    - Creación de dummies (OneHotEncoding): para los modelos líneares es mucho mejor la utilización de variables dummy porque mejoran la interpretabilidad de variables categóricas sin sesgar la interpretación de un valor ordinal. Para modelos basados en árboles de decisión esto no es del todo necesario, ya que se determinará ciertas reglas a partir de la separación de la variable categórica.
     - Utilización creditica: 
     - 
 3. De los modelos realizados, ¿cómo seleccionaste al mejor?
@@ -91,7 +92,7 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
 4. ¿Qué desafíos encontraste y cómo los superaste?
     - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. 
     - Organización de pasos y código de acuerdo a qué variable objetivo se desea. En el EDA intenté explorar todo lo posible sobre el dataset, enfocándolo hacia las variables objetivo según consideraba apropiado. Mientras que en el paso de preparación de datos preferí separar por secciones de acuerdo a lo buscado ya que los datasets si bien comparten muchos pasos de preparación similares, no pueden ser iguales debido a la temporalidad de la variable objetivo. 
-    
+
 
 ## Preguntas adicionales
 
