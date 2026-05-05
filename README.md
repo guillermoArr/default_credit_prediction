@@ -90,9 +90,9 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
     - **Parsimonía:** 
     - **F1 Score y accuracy:** 
 4. ¿Qué desafíos encontraste y cómo los superaste?
-    - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. 
+    - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. Asimismo la relación entre las variables de pagos, estado de pago y deuda me hicieron ruido al revisar algunos datos de ejemplo ya que no identifiqué un patrón claro, que mi intuición me dice que debería existir. Podría haberse realizado un modelo de regresión para identificar estas relaciones, pero lo consideré fuera del alcance de la tarea.
     - Organización de pasos y código de acuerdo a qué variable objetivo se desea. En el EDA intenté explorar todo lo posible sobre el dataset, enfocándolo hacia las variables objetivo según consideraba apropiado. Mientras que en el paso de preparación de datos preferí separar por secciones de acuerdo a lo buscado ya que los datasets si bien comparten muchos pasos de preparación similares, no pueden ser iguales debido a la temporalidad de la variable objetivo. 
-
+    - El uso de RobustScaler con ColumnTransformer puede reacomodar las variables si de acuerdo a cuales se van a reescalar y cuales no, esto presentó un obstaculo no previsto para el cual fue necesario debuggear los resultados para darme cuenta de que solo estaban reorganizadas y poder reacomodarlas correctamente. 
 
 ## Preguntas adicionales
 
