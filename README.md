@@ -58,9 +58,21 @@ Se utiliza el [conjunto de datos](https://archive.ics.uci.edu/dataset/350/defaul
 - *default.payment.next.month*: Default payment (1=yes, 0=no)
 
 ## Objetivo
-Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con los modelos que se consideren apropiados.
+Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con los modelos que se consideren apropiados.
 
 ## Estructura del repositorio
+- data
+    - raw
+    - interim
+    - processed
+- notebooks: con siguiente nomenclatura
+    - 0: data extraction
+    - 1: data exploration
+    - 2: data preparation
+    - 3: models / data usage
+- outputs: imágenes y otras salidas
+- reports: slide-deck 
+- requirements.txt : archivo con lista de librerías y dependencias necesarias para la réplica de resultados
 
 ## Insights detectados
 1. De las deficiencias en los datos, ¿cuáles y como las identificaste?
@@ -70,8 +82,15 @@ Se busca predecir la variable **PAY_AMT4** y **default.payment.next.month** con 
     - **DESBALANCE DE VARIABLE DEFAULT:**
         - Usando porcentajes y gráficos observando el tamaño de las clases de la variable default detectados un desbalance de 1:3.5.
 2. De realizar creación de variables, explica cuales hiciste y por qué.
+    - Utilización creditica: 
+    - 
 3. De los modelos realizados, ¿cómo seleccionaste al mejor?
+    - **Optimización de hiperparámetros con Optuna:** 
+    - **Parsimonía:** 
+    - **F1 Score y accuracy:** 
 4. ¿Qué desafíos encontraste y cómo los superaste?
+    - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. 
+    - 
 
 ## Preguntas adicionales
 
