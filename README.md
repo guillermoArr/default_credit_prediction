@@ -110,7 +110,6 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
     - Organización de pasos y código de acuerdo a qué variable objetivo se desea. En el EDA intenté explorar todo lo posible sobre el dataset, enfocándolo hacia las variables objetivo según consideraba apropiado. Mientras que en el paso de preparación de datos preferí separar por secciones de acuerdo a lo buscado ya que los datasets si bien comparten muchos pasos de preparación similares, no pueden ser iguales debido a la temporalidad de la variable objetivo. 
     - El uso de RobustScaler con ColumnTransformer puede reacomodar las variables si de acuerdo a cuales se van a reescalar y cuales no, esto presentó un obstaculo no previsto para el cual fue necesario debuggear los resultados para darme cuenta de que solo estaban reorganizadas y poder reacomodarlas correctamente. 
     - El cómputo y tiempo es limitado, por lo que una búsqueda exhaustiva de nuevas variables, de hiperparámetros y de modelos también es limitada. Por lo que se optó por una selección sencilla, menor y general para cada una de las opciones anteriores intentando no exceder los recursos. Una de las principales consecuencias de ello, fue utilizar únicamente un conjunto de validación para la búsqueda de hiperparámetros en lugar de un cross validation con KFold o StartifiedKFold. 
-    -
 
 ## Preguntas adicionales
 
