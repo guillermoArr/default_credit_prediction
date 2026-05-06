@@ -22,8 +22,8 @@ util_5,numeric
 util_6,numeric
 pay_ratio_5,numeric
 pay_ratio_6,numeric
-remaining_bal_4,numeric
 remaining_bal_5,numeric
+remaining_bal_6,numeric
 avg_monthly_bill,numeric
 avg_monthly_payment,numeric
 max_payment_delay,categorical
