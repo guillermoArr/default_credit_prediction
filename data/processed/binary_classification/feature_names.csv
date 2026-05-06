@@ -1,8 +1,6 @@
 feature_name,feature_type
 LIMIT_BAL,numeric
 SEX,binary
-EDUCATION,categorical
-MARRIAGE,categorical
 AGE,numeric
 PAY_1,categorical
 PAY_2,categorical
