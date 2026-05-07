@@ -91,9 +91,16 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
 2. De realizar creación de variables, explica cuales hiciste y por qué.
     - Creación de dummies (OneHotEncoding): para los modelos líneares es mucho mejor la utilización de variables dummy porque mejoran la interpretabilidad de variables categóricas sin sesgar la interpretación de un valor ordinal. Para modelos basados en árboles de decisión esto no es del todo necesario, ya que se determinará ciertas reglas a partir de la separación de la variable categórica.
     - Ratios / combinación de variables: obtener métricas sobre el comportamiento de cada cliente en distintos margenes financieros como:
-        - Utilización creditica
-        -  
-    - 
+        - Utilización creditica: que tanto utiliza la línea de crédito puede representar un nivel de importancia de la línea para esa persona.
+        - Cantidad de pago respecto al total de la cuenta a pagar, en caso de tener una cuenta positiva, ya que de lo contrario podría reflejar saldo a favor y su proporción de pago se asigna 1 (como si hubiera pagado completamente)
+    - Descriptivas generales que pudieran ayudar a los modelos a encontrar relaciones más complejas:
+        - Tendencia y volatilidad de los pagos (último pago menos primer pago histórico disponible y desviación estandar entre los pagos realizados)
+    - Indicadoras de comportamientos sospechosos: 
+        - último pago es menor que el promedio de los pagos realizados por el cliente
+        - ha tenido algún atraso
+    - Conteos:
+        - Cuantos días ha tenido atrasos: refleja que tan consistente es su impago -> debería apoyar a la probabilidad de que vuelva a impago
+        - Cuantas veces su pago ha sido de 0 (noté que había varios casos en los que por varios meses se tenían valores de cuenta y pagos en ceros)
 3. De los modelos realizados, ¿cómo seleccionaste al mejor?
     - **Optimización de hiperparámetros con Optuna:**  
     Para la elección entre mismos modelos, es importante asegurarse que se esté utilizando un buen modelo enfocado en los objetivos de negocio. Esto ayuda en conseguir un mejor ajuste del modelo y busca mejorar la generalización. 
@@ -109,8 +116,27 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
     - Entendimiento del dataset: llama la atención que existan distintas versiones de la documentación del dataset y no coincida con los datos per se. Sin embargo, asumí que sería parte del ejercicio y actúe conforme a la intuición y supuestos identificables. Asimismo la relación entre las variables de pagos, estado de pago y deuda me hicieron ruido al revisar algunos datos de ejemplo ya que no identifiqué un patrón claro, que mi intuición me dice que debería existir. Podría haberse realizado un modelo de regresión para identificar estas relaciones, pero lo consideré fuera del alcance de la tarea.
     - Organización de pasos y código de acuerdo a qué variable objetivo se desea. En el EDA intenté explorar todo lo posible sobre el dataset, enfocándolo hacia las variables objetivo según consideraba apropiado. Mientras que en el paso de preparación de datos preferí separar por secciones de acuerdo a lo buscado ya que los datasets si bien comparten muchos pasos de preparación similares, no pueden ser iguales debido a la temporalidad de la variable objetivo. 
     - El uso de RobustScaler con ColumnTransformer puede reacomodar las variables si de acuerdo a cuales se van a reescalar y cuales no, esto presentó un obstaculo no previsto para el cual fue necesario debuggear los resultados para darme cuenta de que solo estaban reorganizadas y poder reacomodarlas correctamente. 
-    - El cómputo y tiempo es limitado, por lo que una búsqueda exhaustiva de nuevas variables, de hiperparámetros y de modelos también es limitada. Por lo que se optó por una selección sencilla, menor y general para cada una de las opciones anteriores intentando no exceder los recursos. Una de las principales consecuencias de ello, fue utilizar únicamente un conjunto de validación para la búsqueda de hiperparámetros en lugar de un cross validation con KFold o StartifiedKFold. 
-
+    - El cómputo y tiempo es limitado, por lo que una búsqueda exhaustiva de nuevas variables, de hiperparámetros y de modelos también es limitada. Por lo que se optó por una selección sencilla, menor y general para cada una de las opciones anteriores intentando no exceder los recursos. Una de las principales consecuencias de ello, fue utilizar únicamente un conjunto de validación para la búsqueda de hiperparámetros en lugar de un cross validation con KFold o StratifiedKFold. 
+    - Para ejecutar los modelos de regresión fue necesario recurrir a colab para el uso de GPUs para el MLP. Aún así tardó unos minutos en correr. Lamentablemente no se pudieron extraer los archivos de salida de ese notebook antes de que la instancia de colab se reciclara.
+    - Debí haber escalado la variable objetivo de la regresión o utilizado un logaritmo para evitar problemas por la distribución tan sesgada y después reescalar el modelo de acuerdo con ese resultado. 
+5. **Conclusiones**  
+- Modelo de clasificación: 
+    -  XG Boost es el mejor modelo entre los dos implementados:
+        - Tiene mejores métricas en general tanto en desempeño como en estabilidad entre entrenamiento, validación y prueba
+    - Hay consistencia en las variables importantes:
+        - Pagos recientes (promedios y estados)
+        - Retrasos severos 
+        - Límite de crédito: es importante revisar si se están otorgando líneas inmanejables para los clientes
+    - Ajustar el umbral de discriminación según el interés de la empresa: recall = reducción de cartera total a costa de eliminación de malos.
+    - Ajustar las condiciones de otorgamiento de crédito y hacer un score para decisión de aceptación.
+- Modelo de predicción de cantidad de pago:
+    - No hay modelo bueno, solo menos peor: la variable objetivo de pago tiene un sesgo muy fuerte, incluso con escalamiento. Una mejor oportunidad de mejorar la predicción sería establecer umbrales/niveles en lugar de cantidades exactas.
+        - Aun con nuevas variables con buena relación con el objetivo, no se logra buen desempeño.
+    - MLP parece ser un modelo sobre ajustado y una herramienta mucho más compleja en interpretabilidad y recursos de lo necesario. 
+    - Hay que establecer umbrales para clientes con brechas de pago grandes ya que no alcanzan a cubrir sus pagos a futuro. 
+    - Establecer estrategias de tasas o recuperación para clientes en situaciones de retraso
+    - Relación con falta de compromiso de pago; robustecer estrategias de cobranza
+    
 ## Preguntas adicionales
 
 1. Establece con tus propias palabras, algunas buenas prácticas y funciones recomendadas para optimizar operaciones de lectura, escritura y manipulación en Spark/PySpark.
@@ -140,3 +166,4 @@ Se busca predecir la variable **PAY_AMT4** y **default_payment_next_month** con 
 - Aumentar el tamaño de las redes de búsqueda de hiperparámetros.
 - Probar más modelos.
 - Implementar un sklearn Pipeline para pruebas de inferencia. 
+- Hacer más experimentos con Oversampling, stratified subsampling & SMOTE.
